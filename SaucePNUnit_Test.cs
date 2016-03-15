@@ -40,7 +40,8 @@ namespace Saucey_Selenium {
             caps.SetCapability("username", "SAUCE_USERNAME");
             caps.SetCapability("accessKey", "SAUCE_ACCESS_KEY");
             caps.SetCapability("name", TestContext.CurrentContext.Test.Name);
-
+            
+            //("http://YOUR_USERNAME:YOUR_ACCESS_KEY@ondemand.saucelabs.com:80/wd/hub");
             driver = new RemoteWebDriver(new Uri("http://ondemand.saucelabs.com:80/wd/hub"), caps, TimeSpan.FromSeconds(600))
 
         }
@@ -58,7 +59,7 @@ namespace Saucey_Selenium {
         [TearDown]
         public void CleanUp()
         {
-            bool passed = TestContext.CurrentContext.Result.Status == TestStatus.Passed;
+            bool passed = TestContext.CurrentContext.Result.Outcome.Status == TestStatus.Passed;
             try
             {
                 // Logs the result to Sauce Labs
